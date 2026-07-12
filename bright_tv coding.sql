@@ -33,6 +33,39 @@ CASE
  WHEN race IS NULL THEN 'unknown'
  ELSE race
 END AS cleaned_race
+FROM catbrighttv.catbrighschema.user_profiles;
+
+......province checks
+.........................................
+SELECT DISTINCT province
+FROM catbrighttv.catbrighschema.user_profiles;
+
+SELECT DISTINCT
+   CASE
+ WHEN province = 'None' THEN 'unknown'
+ WHEN province = ' ' THEN 'unknown'
+ WHEN province IS NULL THEN 'unknown'
+ ELSE province
+END AS cleaned_province
+FROM catbrighttv.catbrighschema.user_profiles;
+
+......AGE checks
+.............................................
+SELECT MIN(age) AS min_age, MAX(age) AS max_age,
+AVG(age) AS avg_age
+FROM catbrighttv.catbrighschema.user_profiles;
+
+SELECT 
+  CASE WHEN age = 0 THEN 'infant'
+       WHEN age BETWEEN 1 AND 12 THEN 'kids'
+       WHEN age BETWEEN 13 AND 17 THEN 'yourth'
+        WHEN age BETWEEN 18 AND 35 THEN 'young_adult'
+       WHEN age BETWEEN 36 AND 50 THEN 'adult'
+       WHEN age >50 AND AGE<=60 THEN 'elder'
+       WHEN age >60 THEN 'pensioner'
+       ELSE 'unknown'
+       END AS age_group
 FROM catbrighttv.catbrighschema.user_profiles
+
 
 
